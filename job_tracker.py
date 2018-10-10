@@ -1,3 +1,5 @@
+# This will save your life
+
 import openpyxl, time, sys
 from openpyxl_shift.shift import Shift
 import Emails.send_emails as email
