@@ -27,7 +27,6 @@ def send_email(tracker, template_variables, sender, message_template, MY_ADDRESS
 
         # Change status of outcome from "ready" to "email sent"
         tracker[cell].value = "Email Sent"
-        print(tracker[cell].value)
 
 
 def read_template(filename):
@@ -37,27 +36,18 @@ def read_template(filename):
 
 
 def get_contacts(worksheet, bottom_row): # Change this to match job tracker excel file
-    print(worksheet)
     names = []
     emails = []
     cells = []
     company = []
     position = []
-    print(bottom_row)
     for i in range(3, bottom_row+1):
-        print(worksheet["J{}".format(i)].value)
         if worksheet["J{}".format(i)].value == "Ready":
             names.append(worksheet["F{}".format(i)].value)
             emails.append(worksheet["G{}".format(i)].value)
             company.append(worksheet["B{}".format(i)].value)
             position.append(worksheet["C{}".format(i)].value)
             cells.append("J{}".format(i))
-
-    print(names)
-    print(emails)
-    print(cells)
-    print(company)
-    print(position)
 
     return zip(names, emails, cells, company, position)
 
