@@ -4,13 +4,13 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
 
-def send_email(tracker, names, emails, cells, message_template, MY_ADDRESS, s):
+def send_email(tracker, template_variables, sender, message_template, MY_ADDRESS, s):
     # For each contact, send the email:
-    for name, email, cell in zip(names, emails, cells):
+    for name, email, cell, company, position, in template_variables:
         msg = MIMEMultipart()       # create a message
 
         # add in the actual person name to the message template
-        message = message_template.substitute(PERSON_NAME=name.title())
+        message = message_template.substitute(RECRUITER_FIRST_NAME=name.title(), MY_NAME=sender.title(), COMPANY_NAME=company, JOB_TITLE=position, MY_EMAIL=MY_ADDRESS)
 
         # setup the parameters of the message
         msg['From']=MY_ADDRESS
@@ -41,19 +41,25 @@ def get_contacts(worksheet, bottom_row): # Change this to match job tracker exce
     names = []
     emails = []
     cells = []
+    company = []
+    position = []
     print(bottom_row)
     for i in range(3, bottom_row+1):
         print(worksheet["J{}".format(i)].value)
         if worksheet["J{}".format(i)].value == "Ready":
             names.append(worksheet["F{}".format(i)].value)
             emails.append(worksheet["G{}".format(i)].value)
+            company.append(worksheet["B{}".format(i)].value)
+            position.append(worksheet["C{}".format(i)].value)
             cells.append("J{}".format(i))
 
     print(names)
     print(emails)
     print(cells)
+    print(company)
+    print(position)
 
-    return names, emails, cells
+    return zip(names, emails, cells, company, position)
 
 
 def prepare_emails():
@@ -64,17 +70,18 @@ def prepare_emails():
 
     MY_ADDRESS = "alex.rogers823@gmail.com"
     PASSWORD = input("Enter email password: ")
+    sender = "Alex Rogers" # Change this to your own name
     s = smtplib.SMTP(host="smtp.gmail.com", port=587)
     s.starttls()
     s.login(MY_ADDRESS, PASSWORD)
 
-    names, emails, cells = get_contacts(tracker, bottom_row)
+    template_variables = get_contacts(tracker, bottom_row)
     try:
-        message_template = read_template('test_message.txt')
+        message_template = read_template('recruiter_email.txt')
     except FileNotFoundError:
-        message_template = read_template('Emails/test_message.txt')
+        message_template = read_template('Emails/recruiter_email.txt')
 
-    send_email(tracker, names, emails, cells, message_template, MY_ADDRESS, s)
+    send_email(tracker, template_variables, sender, message_template, MY_ADDRESS, s)
 
     print("Emails sent!")
     wb.save("Job_Search_Tracker_Template.xlsx")
