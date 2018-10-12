@@ -1,7 +1,7 @@
 Dear ${RECRUITER_FIRST_NAME},
 
-Hello. My name is ${MY_NAME}, and I am studying software development at DigitalCrafts. I
-recently came across ${COMPANY_NAME} and became interested in the ${JOB_TITLE} position.
+Hello. My name is ${MY_NAME}, and I am studying software development at DigitalCrafts.
+I recently came across ${COMPANY_NAME} and became interested in the ${JOB_TITLE} position.
 I believe that I have the qualities needed, and would love to talk more about the
 opportunity with you if possible.
 
@@ -10,3 +10,4 @@ Thank you for your time.
 Sincerely,
 ${MY_NAME}
 ${MY_EMAIL}
+https://github.com/alexrogers823

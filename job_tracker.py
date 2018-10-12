@@ -96,7 +96,7 @@ def display_active():
 def edit_entry():
     for i in range(2, bottom_row+1):
         position = '{}: {}, {}'
-        if tracker["L"+str(i)] != "Open":
+        if tracker["L"+str(i)].value != "Open":
             position += ' (Closed)'
         print(position.format(i, tracker["B"+str(i)].value, tracker["C"+str(i)].value))
     print()

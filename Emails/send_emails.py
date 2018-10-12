@@ -15,7 +15,7 @@ def send_email(tracker, template_variables, sender, message_template, MY_ADDRESS
         # setup the parameters of the message
         msg['From']=MY_ADDRESS
         msg['To']=email
-        msg['Subject']="This is TEST"
+        msg['Subject']= "Interest in {} at {}".format(position, company)
 
         # add in the message body
         msg.attach(MIMEText(message, 'plain'))
