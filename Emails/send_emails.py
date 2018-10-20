@@ -49,6 +49,10 @@ def get_contacts(worksheet, bottom_row): # Change this to match job tracker exce
             position.append(worksheet["C{}".format(i)].value)
             cells.append("J{}".format(i))
 
+        # Limiting emails to 10 per call (to not get overwhelmed)
+        if len(emails) > 10:
+            break
+
     return zip(names, emails, cells, company, position)
 
 
