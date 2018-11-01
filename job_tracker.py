@@ -64,7 +64,8 @@ def prepare_entry():
 def add_entry(company, title, recruiter, email, url, language):
     global bottom_row
     bottom_row += 1
-    entries = [company, title, "not yet", None, recruiter, email, None, None, "Ready", url, "Open", language]
+    status = "Ready" if '@' in email else "Need Email"
+    entries = [company, title, "not yet", None, recruiter, email, None, None, status, url, "Open", language]
     column = 66
 
     for entry in entries:
