@@ -10,4 +10,6 @@ Thank you for your time.
 Sincerely,
 ${MY_NAME}
 ${MY_EMAIL}
+
+GitHub link (scanned and secured by Google):
 https://github.com/alexrogers823
