@@ -6,6 +6,7 @@ from email.mime.text import MIMEText
 
 def send_email(tracker, template_variables, sender, message_template, MY_ADDRESS, s):
     # For each contact, send the email:
+    number = 0
     for name, email, cell, company, position, in template_variables:
         msg = MIMEMultipart()       # create a message
 
@@ -27,6 +28,9 @@ def send_email(tracker, template_variables, sender, message_template, MY_ADDRESS
 
         # Change status of outcome from "ready" to "email sent"
         tracker[cell].value = "Email Sent"
+        number += 1
+
+        return number
 
 
 def read_template(filename):
@@ -75,9 +79,9 @@ def prepare_emails():
     except FileNotFoundError:
         message_template = read_template('Emails/recruiter_email.txt')
 
-    send_email(tracker, template_variables, sender, message_template, MY_ADDRESS, s)
-
-    print("Emails sent!")
+    email_num = send_email(tracker, template_variables, sender, message_template, MY_ADDRESS, s)
+    message_plural = "s" if email_num > 1 else None
+    print("{} Email{} sent!".format(email_num, message_plural))
     wb.save("Job_Search_Tracker_Template.xlsx")
 
     s.quit() # Ends SMTP session and closes connection
