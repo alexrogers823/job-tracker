@@ -61,8 +61,10 @@ def get_contacts(worksheet, bottom_row): # Change this to match job tracker exce
 
 
 def prepare_emails():
-
-    wb = openpyxl.load_workbook("Job_Search_Tracker_Template.xlsx")
+    try:
+        wb = openpyxl.load_workbook("Job_Search_Tracker_Template.xlsx")
+    except FileNotFoundError:
+        wb = openpyxl.load_workbook("Job_Tracker.xlsx")
     tracker = wb["Application Tracker"]
     bottom_row = tracker.max_row
 
