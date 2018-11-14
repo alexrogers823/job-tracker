@@ -62,9 +62,11 @@ def get_contacts(worksheet, bottom_row): # Change this to match job tracker exce
 
 def prepare_emails():
     try:
-        wb = openpyxl.load_workbook("Job_Search_Tracker_Template.xlsx")
+        my_excel = "Job_Search_Tracker_Template.xlsx"
+        wb = openpyxl.load_workbook(my_excel)
     except FileNotFoundError:
-        wb = openpyxl.load_workbook("Job_Tracker.xlsx")
+        my_excel = "Job_Tracker.xlsx"
+        wb = openpyxl.load_workbook(my_excel)
     tracker = wb["Application Tracker"]
     bottom_row = tracker.max_row
 
@@ -84,7 +86,7 @@ def prepare_emails():
     email_num = send_email(tracker, template_variables, sender, message_template, MY_ADDRESS, s)
     message_plural = "s" if email_num > 1 else None
     print("{} Email{} sent!".format(email_num, message_plural))
-    wb.save("Job_Search_Tracker_Template.xlsx")
+    wb.save(my_excel)
 
     s.quit() # Ends SMTP session and closes connection
 

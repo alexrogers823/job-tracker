@@ -95,19 +95,18 @@ def display_active():
     menu()
 
 def edit_entry():
+    print("Rows to edit:")
+    for j in range(13):
+        cell = chr(65+j)
+        print('{}: {}'.format(cell, tracker[cell+"1"].value), end=" | ")
+
     for i in range(2, bottom_row+1):
         position = '{}: {}, {}'
         if tracker["L"+str(i)].value != "Open":
             position += ' (Closed)'
         print(position.format(i, tracker["B"+str(i)].value, tracker["C"+str(i)].value))
     print()
-    num = (input("Which row to edit? (Input index number)\n"))
 
-    for j in range(13):
-        cell = chr(65+j) + num
-        print('{}: {}'.format(cell, tracker[cell].value), end=" | ")
-
-    print()
     change = input("Cell first, then change (Ex: I3, Found Recruiter)\n").split(", ")
     chosen_cell, edited = tuple(change)
 
