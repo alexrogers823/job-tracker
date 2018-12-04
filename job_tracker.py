@@ -99,7 +99,7 @@ def edit_entry():
     for j in range(13):
         cell = chr(65+j)
         print('{}: {}'.format(cell, tracker[cell+"1"].value), end=" | ")
-
+    print()
     for i in range(2, bottom_row+1):
         position = '{}: {}, {}'
         if tracker["L"+str(i)].value != "Open":

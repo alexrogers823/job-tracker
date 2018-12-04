@@ -84,7 +84,7 @@ def prepare_emails():
         message_template = read_template('Emails/recruiter_email.txt')
 
     email_num = send_email(tracker, template_variables, sender, message_template, MY_ADDRESS, s)
-    message_plural = "s" if email_num > 1 else None
+    message_plural = "s" if email_num > 1 else ""
     print("{} Email{} sent!".format(email_num, message_plural))
     wb.save(my_excel)
 
