@@ -77,8 +77,20 @@ def add_entry(company, title, recruiter, email, url, language):
 
 
 def send_emails():
-    email.prepare_emails()
+    if verity_email_contacts():
+        email.prepare_emails()
+    print()
     menu()
+
+def verify_email_contacts():
+    print("You are sending an email to the following:")
+    for i in range(2, bottom_row+1):
+        if tracker["J"+str(i)].value == "Ready":
+            print(tracker["F"+str(i)].value, tracker["B"+str(i)].value)
+    print()
+    confirm = input("Are you okay with this list of people? ")
+
+    return True if confirm.lower().startswith('y') else False
 
 
 def display_active():
